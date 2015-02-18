@@ -1,9 +1,9 @@
 Name:           screenfetch
-Version:        3.6.2
-Release:        7.20140914gitdec1cd6c%{?dist}
+Version:        3.6.5
+Release:        1.20140929git0fb57330%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
-%global commit dec1cd6c2471defe4459967fbc8ae15b55714338
+%global commit 0fb57330f1ce320a0518bbe432099fb2a5e7a273
 
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
@@ -40,6 +40,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Wed Feb 18  2015 Martín Buenahora <zironid@fedoraproject.org> - 3.6.5-1.20140929git0fb57330
+- Updated program to version 3.6.5
+
 * Wed Sep 24 2014 Martín Buenahora <zironid@fedoraproject.org> - 3.6.2-7.20140914gitdec1cd6c
 - Deleted dot tag from manpage location (not nedded)
 
