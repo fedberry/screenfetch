@@ -1,0 +1,13 @@
+2015-02-18 16:00:52,041 - Mock Version: 1.2.5
+2015-02-18 16:00:52,076 - Start: yum install
+2015-02-18 16:07:11,219 - Finish: yum install
+2015-02-18 16:07:11,718 - Finish: chroot init
+2015-02-18 16:07:11,790 - Start: build phase for screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:11,796 - Start: build setup for screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:12,057 - Finish: build setup for screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:12,057 - Start: rpmbuild screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:12,270 - Finish: rpmbuild screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:12,273 - Finish: build phase for screenfetch-3.6.5-1.20140929git0fb57330.fc23.src.rpm
+2015-02-18 16:07:12,274 - Start: clean chroot
+2015-02-18 16:07:16,881 - Finish: clean chroot
+2015-02-18 16:07:16,882 - Finish: run
