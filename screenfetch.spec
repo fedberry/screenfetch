@@ -1,6 +1,6 @@
 Name:           screenfetch
 Version:        3.6.5
-Release:        1.20140929git0fb57330%{?dist}
+Release:        2.20140929git0fb57330%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 %global commit 0fb57330f1ce320a0518bbe432099fb2a5e7a273
@@ -40,6 +40,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.6.5-2.20140929git0fb57330
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Wed Feb 18  2015 Martín Buenahora <zironid@fedoraproject.org> - 3.6.5-1.20140929git0fb57330
 - Updated program to version 3.6.5
 
