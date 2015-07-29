@@ -1,16 +1,13 @@
 Name:           screenfetch
-Version:        3.6.5
-Release:        2.20140929git0fb57330%{?dist}
+Version:        3.7.0
+Release:        1%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
-
-%global commit 0fb57330f1ce320a0518bbe432099fb2a5e7a273
 
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
-Source0:        https://github.com/KittyKatt/screenFetch/archive/%{commit}/screenFetch-%{commit}.tar.gz
+Source0:        https://github.com/KittyKatt/screenFetch/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
-
 
 %description
 This handy Bash script can be used to generate one of 
@@ -24,7 +21,7 @@ customizing the screen-shot command! This script is very easy
 to add to and can easily be extended.
 
 %prep
-%setup -qn screenFetch-%{commit}
+%setup -qn screenFetch-%{version}
 
 %build
 #Nothing to build
@@ -33,13 +30,17 @@ to add to and can easily be extended.
 install -m 755 -p -D screenfetch-dev %{buildroot}%{_bindir}/screenfetch
 install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 
-
 %files
-%doc CHANGELOG COPYING README.mkdn TODO
+%license COPYING
+%doc CHANGELOG README.mkdn TODO
 %{_bindir}/screenfetch
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Wed Jul 29 2015 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.7.0-1
+- Update to 3.7.0
+- minor packaging fixes
+
 * Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.6.5-2.20140929git0fb57330
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
