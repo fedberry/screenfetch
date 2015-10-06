@@ -1,13 +1,15 @@
 Name:           screenfetch
 Version:        3.7.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
-Source0:        https://github.com/KittyKatt/screenFetch/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/KittyKatt/%{name}/archive/v%{version}/screenFetch-%{version}.tar.gz
 
 BuildArch:      noarch
+
+Requires:       scrot
 
 %description
 This handy Bash script can be used to generate one of 
@@ -37,6 +39,10 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Tue Oct 06 2015 Martín Buenahora <zironid@fedoraproject.org> - 3.7.0-2
+- Added 'scrot' as a dependencie
+- Fixed source URL
+
 * Wed Jul 29 2015 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.7.0-1
 - Update to 3.7.0
 - minor packaging fixes
