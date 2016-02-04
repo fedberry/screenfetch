@@ -1,6 +1,6 @@
 Name:           screenfetch
 Version:        3.7.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 License:        GPLv3+
@@ -39,6 +39,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.7.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Tue Oct 06 2015 Martín Buenahora <zironid@fedoraproject.org> - 3.7.0-2
 - Added 'scrot' as a dependencie
 - Fixed source URL
