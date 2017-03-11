@@ -9,7 +9,7 @@ Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
 
-Requires:       scrot
+Recommends:     scrot
 
 %description
 This handy Bash script can be used to generate one of 
