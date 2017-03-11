@@ -12,14 +12,14 @@ BuildArch:      noarch
 Recommends:     scrot
 
 %description
-This handy Bash script can be used to generate one of 
+This handy Bash script can be used to generate one of
 those nifty terminal theme information + ASCII distribution
-logos you see in everyone's screen-shots nowadays. It will 
+logos you see in everyone's screen-shots nowadays. It will
 auto-detect your distribution and display an ASCII version
-of that distribution's logo and some valuable information 
-to the right. There are options to specify no ASCII art, 
-colors, taking a screen-shot upon displaying info, and even 
-customizing the screen-shot command! This script is very easy 
+of that distribution's logo and some valuable information
+to the right. There are options to specify no ASCII art,
+colors, taking a screen-shot upon displaying info, and even
+customizing the screen-shot command! This script is very easy
 to add to and can easily be extended.
 
 %prep
