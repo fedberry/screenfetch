@@ -24,6 +24,7 @@ to add to and can easily be extended.
 
 %prep
 %setup -qn screenFetch-%{version}
+sed -i -e '1s|.*|#!/bin/bash|' screenfetch-dev
 
 %build
 #Nothing to build
