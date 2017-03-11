@@ -1,11 +1,11 @@
 Name:           screenfetch
-Version:        3.7.0
-Release:        4%{?dist}
+Version:        3.8.0
+Release:        1%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
-Source0:        https://github.com/KittyKatt/%{name}/archive/v%{version}/screenFetch-%{version}.tar.gz
+Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -39,6 +39,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Sat Mar 11 2017 Igor Gnatenko <ignatenko@redhat.com> - 3.8.0-1
+- Update to 3.8.0
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.7.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
