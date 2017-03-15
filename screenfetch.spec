@@ -1,11 +1,12 @@
 Name:           screenfetch
 Version:        3.8.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:         0001-Add-fedberry-support.patch
 
 BuildArch:      noarch
 
@@ -26,6 +27,8 @@ to add to and can easily be extended.
 %setup -qn screenFetch-%{version}
 sed -i -e '1s|.*|#!/bin/bash|' screenfetch-dev
 
+%patch0 -p1
+
 %build
 #Nothing to build
 
@@ -40,6 +43,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Wed Mar 15 2017 Vaughan Agrez <devel at agrez dot net> - 3.8.0-2
+- Add support for FedBerry (patch0)
+
 * Sat Mar 11 2017 Igor Gnatenko <ignatenko@redhat.com> - 3.8.0-1
 - Update to 3.8.0
 

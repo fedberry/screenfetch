@@ -1,0 +1,108 @@
+From 1b982fb0b7d89189ecb9d81779e43f7a2090f855 Mon Sep 17 00:00:00 2001
+Message-Id: <1b982fb0b7d89189ecb9d81779e43f7a2090f855.1489577502.git.devel@agrez.net>
+From: Vaughan Agrez <devel@agrez.net>
+Date: Wed, 15 Mar 2017 19:30:15 +0800
+Subject: [PATCH] Add support for FedBerry
+
+---
+ screenfetch-dev | 42 ++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 38 insertions(+), 4 deletions(-)
+
+diff --git a/screenfetch-dev b/screenfetch-dev
+index 4d92329..7b05f33 100755
+--- a/screenfetch-dev
++++ b/screenfetch-dev
+@@ -227,7 +227,7 @@ detectColors () {
+ 	my_hcolor=$(colorNumberToCode "${my_hcolor}")
+ }
+ 
+-supported_distros="Alpine Linux, Antergos, Arch Linux (Old and Current Logos), BLAG, BunsenLabs, CentOS, Chakra, Chapeau, Chrome OS, Chromium OS, CrunchBang, CRUX, Debian, Deepin, Devuan, Dragora, elementary OS, Evolve OS, Exherbo, Fedora, Frugalware, Fuduntu, Funtoo, Fux, Gentoo, gNewSense, Jiyuu Linux, Kali Linux, KaOS, KDE neon, Kogaion, Korora, LinuxDeepin, Linux Mint, LMDE, Logos, Mageia, Mandriva/Mandrake, Manjaro, Mer, Netrunner, NixOS, openSUSE, Oracle Linux, Parabola GNU/Linux-libre, Pardus, Parrot Security, PCLinuxOS, PeppermintOS, Qubes OS, Raspbian, Red Hat Enterprise Linux, ROSA, Sabayon, SailfishOS, Scientific Linux, Slackware, Solus, SparkyLinux, SteamOS, SUSE Linux Enterprise, SwagArch, TinyCore, Trisquel, Ubuntu, Viperr and Void."
++supported_distros="Alpine Linux, Antergos, Arch Linux (Old and Current Logos), BLAG, BunsenLabs, CentOS, Chakra, Chapeau, Chrome OS, Chromium OS, CrunchBang, CRUX, Debian, Deepin, Devuan, Dragora, elementary OS, Evolve OS, Exherbo, FedBerry, Fedora, Frugalware, Fuduntu, Funtoo, Fux, Gentoo, gNewSense, Jiyuu Linux, Kali Linux, KaOS, KDE neon, Kogaion, Korora, LinuxDeepin, Linux Mint, LMDE, Logos, Mageia, Mandriva/Mandrake, Manjaro, Mer, Netrunner, NixOS, openSUSE, Oracle Linux, Parabola GNU/Linux-libre, Pardus, Parrot Security, PCLinuxOS, PeppermintOS, Qubes OS, Raspbian, Red Hat Enterprise Linux, ROSA, Sabayon, SailfishOS, Scientific Linux, Slackware, Solus, SparkyLinux, SteamOS, SUSE Linux Enterprise, SwagArch, TinyCore, Trisquel, Ubuntu, Viperr and Void."
+ supported_other="Dragonfly/Free/Open/Net BSD, Haiku, Mac OS X, Windows+Cygwin and Windows+MSYS2."
+ supported_dms="KDE, GNOME, Unity, Xfce, LXDE, Cinnamon, MATE, Deepin, CDE, RazorQt and Trinity."
+ supported_wms="2bwm, 9wm, Awesome, Beryl, Blackbox, Cinnamon, chromeos-wm, Compiz, deepin-wm, dminiwm, dwm, dtwm, E16, E17, echinus, Emerald, FluxBox, FLWM, FVWM, herbstluftwm, howm, IceWM, KWin, Metacity, monsterwm, Musca, Gala, Mutter, Muffin, Notion, OpenBox, PekWM, Ratpoison, Sawfish, ScrotWM, SpectrWM, StumpWM, subtle, sway, TWin, WindowMaker, WMFS, wmii, Xfwm4, XMonad and i3."
+@@ -389,7 +389,7 @@ detectdistro () {
+ 				done
+ 			fi
+ 			case "${distro_detect}" in
+-				"CentOS"|"Chapeau"|"Deepin"|"Devuan"|"Fedora"|"gNewSense"|"Jiyuu Linux"|"Kogaion"|"Korora"|"Mageia"|"Netrunner"|"NixOS"|"Pardus"|"Raspbian"|"Sabayon"|"Solus"|"SteamOS"|"Trisquel"|"Ubuntu"|"GrombyangOS"|"Scientific Linux")
++				"CentOS"|"Chapeau"|"Deepin"|"Devuan"|"FedBerry"|"Fedora"|"gNewSense"|"Jiyuu Linux"|"Kogaion"|"Korora"|"Mageia"|"Netrunner"|"NixOS"|"Pardus"|"Raspbian"|"Sabayon"|"Solus"|"SteamOS"|"Trisquel"|"Ubuntu"|"GrombyangOS"|"Scientific Linux")
+ 					# no need to fix $distro/$distro_codename/$distro_release
+ 					distro="${distro_detect}"
+ 					;;
+@@ -670,6 +670,7 @@ detectdistro () {
+ 					[[ "${distro}" == "logos" ]] && distro="Logos"
+ 					[[ "${distro}" == "Arch" || "${distro}" == "Archarm" || "${distro}" == "archarm" ]] && distro="Arch Linux"
+ 					[[ "${distro}" == "elementary" ]] && distro="elementary OS"
++					[[ "${distro}" == "Fedberry" ]] && distro_more="$(awk -F'=' '/^VERSION_ID=/ {print $2}' /etc/os-release)"
+ 					[[ "${distro}" == "Fedora" && -d /etc/qubes-rpc ]] && distro="qubes" # Inner VM
+ 					[[ "${distro}" == "Ol" || "${distro}" == "ol" ]] && distro="Oracle Linux"
+ 					if [[ "${distro}" == "Oracle Linux" ]] && [ -f /etc/oracle-release ]; then
+@@ -914,6 +915,7 @@ detectdistro () {
+ 		elementary|'elementary os') distro="elementary OS";;
+ 		evolveos) distro="Evolve OS" ;;
+ 		exherbo|exherbo*linux) distro="Exherbo" ;;
++		fedberry) distro="FedBerry" ;;
+ 		fedora) distro="Fedora" ;;
+ 		freebsd) distro="FreeBSD" ;;
+ 		freebsd*old) distro="FreeBSD - Old" ;;
+@@ -1072,7 +1074,7 @@ detectpkgs () {
+ 		'Slackware') pkgs=$(ls -1 /var/log/packages | wc -l) ;;
+ 		'Gentoo'|'Sabayon'|'Funtoo'|'Kogaion') pkgs=$(ls -d /var/db/pkg/*/* | wc -l) ;;
+ 		'NixOS') pkgs=$(ls -d -1 /nix/store/*/ | wc -l) ;;
+-		'Fedora'|'Fux'|'Korora'|'BLAG'|'Chapeau'|'openSUSE'|'SUSE Linux Enterprise'|'Red Hat Enterprise Linux'|'ROSA'|'Oracle Linux'|'CentOS'|'Mandriva'|'Mandrake'|'Mageia'|'Mer'|'SailfishOS'|'PCLinuxOS'|'Viperr'|'Qubes OS'|'Red Star OS') pkgs=$(rpm -qa | wc -l) ;;
++		'FedBerry'|'Fedora'|'Fux'|'Korora'|'BLAG'|'Chapeau'|'openSUSE'|'SUSE Linux Enterprise'|'Red Hat Enterprise Linux'|'ROSA'|'Oracle Linux'|'CentOS'|'Mandriva'|'Mandrake'|'Mageia'|'Mer'|'SailfishOS'|'PCLinuxOS'|'Viperr'|'Qubes OS'|'Red Star OS') pkgs=$(rpm -qa | wc -l) ;;
+ 		'Void') pkgs=$(xbps-query -l | wc -l) ;;
+ 		'Evolve OS'|'Solus') pkgs=$(pisi list-installed | wc -l) ;;
+ 		'CRUX') pkgs=$(pkginfo -i | wc -l) ;;
+@@ -3065,6 +3067,38 @@ asciiText () {
+ "${c1}                   ';;; ;;               %s")
+ 		;;
+ 
++		"FedBerry")
++			if [[ "$no_color" != "1" ]]; then
++				c1=$(getColor 'white') # White
++				c2=$(getColor 'light blue') # Light Blue
++			fi
++			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
++			startline="0"
++			logowidth="37"
++			fulloutput=(
++"${c2}       ppp                           %s"
++"${c2}       )DDDDDpc          DD^         %s"
++"${c2}        DDDDDDDDp     qDDDD          %s"
++"${c2}         DDDDQPDDD  DDDDDD           %s"
++"${c2}          SDDDDp)DDDQqDDD            %s"
++"${c1}        sp  ${c2}SDDDP   PPD${c1}  PDp         %s"
++"${c1}      dD^      ${c2}sqpppe${c1}       ^Dp      %s"
++"${c1}    DD       ${c2}dDDDDDDDDDp${c1}      ^Dp    %s"
++"${c1}  (D        ${c2}DDDDDDDDDDDDD${c1}       SD   %s"
++"${c1} (D         ${c2}DDDDDDDDDDDDD${c1}        )D  %s"
++"${c1} D       ${c2}qp SDDDDDDDDDDD  pp${c1}      DD %s"
++"${c1}(D    ${c2}(DDDDD ^DDDDDDDDD  DDDDD${c1}    ^D %s"
++"${c1}(D   ${c2}(DDDDDDDpc   ^   qDDDDDDDD${c1}    D %s"
++"${c1}(D   ${c2}DDDDDDDDDDDDD)DDDDDDDDDDDDD${c1}  )D %s"
++"${c1} D   ${c2}^DDDDDDDDDDDD DDDDDDDDDDDD${c1}   DC %s"
++"${c1} ^D    ${c2}SDDDDDDDD^ p ^DDDDDDDD^${c1}   dD  %s"
++"${c1}  ^Dp      ${c2}^^  sdDDDp   ^^${c1}      DG   %s"
++"${c1}    SD      ${c2}SDDDDDDDDDDD${c1}      dD     %s"
++"${c1}      ^Dp    ${c2}^DDDDDDDDD${c1}    pDD       %s"
++"${c1}         ^DDpp        qqpP^^         %s"
++"${c1}              ^^^^D^^^               %s")
++		;;
++
+ 		"Fedora")
+ 			if [[ "$no_color" != "1" ]]; then
+ 				c1=$(getColor 'white') # White
+@@ -5079,7 +5113,7 @@ infoDisplay () {
+ 	myascii="${distro}"
+ 	[[ "${asc_distro}" ]] && myascii="${asc_distro}"
+ 	case ${myascii} in
+-		"Alpine Linux"|"Arch Linux - Old"|"Fedora"|"Korora"|"Chapeau"|"Mandriva"|"Mandrake"|"Chakra"|"ChromeOS"|"Sabayon"|"Slackware"|"Mac OS X"|"Trisquel"|"Kali Linux"|"Jiyuu Linux"|"Antergos"|"KaOS"|"Logos"|"gNewSense"|"Netrunner"|"NixOS"|"SailfishOS"|"Qubes OS"|"Kogaion"|"PCLinuxOS"|"Obarun"|"Solus"|"SwagArch"|"Parrot Security") labelcolor=$(getColor 'light blue');;
++		"Alpine Linux"|"Arch Linux - Old"|"FedBerry"|"Fedora"|"Korora"|"Chapeau"|"Mandriva"|"Mandrake"|"Chakra"|"ChromeOS"|"Sabayon"|"Slackware"|"Mac OS X"|"Trisquel"|"Kali Linux"|"Jiyuu Linux"|"Antergos"|"KaOS"|"Logos"|"gNewSense"|"Netrunner"|"NixOS"|"SailfishOS"|"Qubes OS"|"Kogaion"|"PCLinuxOS"|"Obarun"|"Solus"|"SwagArch"|"Parrot Security") labelcolor=$(getColor 'light blue');;
+ 		"Arch Linux"|"Frugalware"|"Mageia"|"Deepin"|"CRUX") labelcolor=$(getColor 'light cyan');;
+ 		"Mint"|"LMDE"|"KDE neon"|"openSUSE"|"SUSE Linux Enterprise"|"LinuxDeepin"|"DragonflyBSD"|"Manjaro"|"Manjaro-tree"|"Android"|"Void") labelcolor=$(getColor 'light green');;
+ 		"Ubuntu"|"FreeBSD"|"FreeBSD - Old"|"Debian"|"Raspbian"|"BSD"|"Red Hat Enterprise Linux"|"Oracle Linux"|"Peppermint"|"Cygwin"|"Msys"|"Fuduntu"|"Scientific Linux"|"DragonFlyBSD"|"BackTrack Linux"|"Red Star OS"|"SparkyLinux") labelcolor=$(getColor 'light red');;
+-- 
+2.9.3
+
