@@ -1,6 +1,6 @@
 Name:           screenfetch
 Version:        3.8.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
 
 License:        GPLv3+
@@ -43,6 +43,9 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_mandir}/man1/screenfetch.1*
 
 %changelog
+* Thu Nov 23 2017 Vaughan Agrez <devel at agrez dot net> - 3.8.0-3
+- Bump release
+
 * Wed Mar 15 2017 Vaughan Agrez <devel at agrez dot net> - 3.8.0-2
 - Add support for FedBerry (patch0)
 
