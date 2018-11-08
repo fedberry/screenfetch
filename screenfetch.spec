@@ -1,16 +1,14 @@
 Name:           screenfetch
 Version:        3.8.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A "Bash Screenshot Information Tool"
-
 License:        GPLv3+
 URL:            https://github.com/KittyKatt/screenFetch
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0:         0001-Add-fedberry-support.patch
-
 BuildArch:      noarch
-
 Recommends:     scrot
+
 
 %description
 This handy Bash script can be used to generate one of
@@ -23,18 +21,22 @@ colors, taking a screen-shot upon displaying info, and even
 customizing the screen-shot command! This script is very easy
 to add to and can easily be extended.
 
+
 %prep
 %setup -qn screenFetch-%{version}
 sed -i -e '1s|.*|#!/bin/bash|' screenfetch-dev
 
 %patch0 -p1
 
+
 %build
 #Nothing to build
+
 
 %install
 install -m 755 -p -D screenfetch-dev %{buildroot}%{_bindir}/screenfetch
 install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
+
 
 %files
 %license COPYING
@@ -42,7 +44,11 @@ install -m 644 -p -D screenfetch.1 %{buildroot}%{_mandir}/man1/screenfetch.1
 %{_bindir}/screenfetch
 %{_mandir}/man1/screenfetch.1*
 
+
 %changelog
+* Fri Oct 12 2018 Vaughan Agrez <devel at agrez dot net> - 3.8.0-4
+- Bump release
+
 * Thu Nov 23 2017 Vaughan Agrez <devel at agrez dot net> - 3.8.0-3
 - Bump release
 
